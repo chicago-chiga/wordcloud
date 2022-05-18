@@ -1,0 +1,27 @@
+# define folder and file
+
+# 入出力ファイルの置き場所（指定しない場合は現在のフォルダ）
+file_dir: ./file_dir
+
+# 分析対象の入力ファイル（必須）
+input_txt: filmarks_review_starwars_1.txt
+
+# ユーザ辞書の名前（必須）
+user_dic: udic.csv
+
+# 一時ファイル名（固定でよい）
+output_words: tmp_words.txt
+
+# 出力するwordcloudファイルのフォントファイルのパス（TTFファイル）
+font_path: ./font/YuGothB003.ttf
+
+# 出力するwordcloud画像ファイル名（必須）
+wordcloud_png: wc_starwars.png
+
+# 除外する単語があれば指定する
+stop_words:
+  - "ほしい"
+  - "欲しい"
+
+# 文字数カウントオプションで上位何番目まで表示するか
+top_rank: 40

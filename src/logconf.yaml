@@ -1,0 +1,27 @@
+version: 1
+
+formatters:
+  fmt1:
+    format: '[%(levelname)s]%(asctime)s - %(filename)s %(message)s'
+    datefmt: '%Y/%m/%d %I:%M:%S'
+handlers:
+  h1:
+    class: logging.StreamHandler
+    level: INFO
+    formatter: fmt1
+    stream: ext://sys.stdout
+  h2:
+    class: logging.FileHandler
+    level: WARN
+    formatter: fmt1
+    filename: os.path.join(os.path.pardir, 'file_dir', 'error_log')
+    encoding: utf8
+loggers:
+  logger1:
+    level: DEBUG
+    handlers: [h1, h2]
+    qualname: console
+    propagate: no
+root:
+  level: DEBUG
+  handlers: [h1]
