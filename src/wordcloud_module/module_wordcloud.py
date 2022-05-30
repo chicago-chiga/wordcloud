@@ -26,19 +26,6 @@ def word_extraction(udic_file, udic_type, stop_words):
         raise
 
 
-def split_text(src, out, udic_file, stop_words, udic_type):
-    try:
-        a = word_extraction(udic_file, udic_type, stop_words)
-
-        with open(src, encoding='utf8') as f1:
-            with open(out, mode='w', encoding='utf8') as f2:
-                for line in f1:
-                    tokens = list(a.analyze(line))
-                    f2.write('%s\n' % ' '.join(tokens))
-    except:
-        raise
-
-
 def show_wordcloud(word_file, font_path):
     try:
         with open(word_file, encoding='utf8') as f:
@@ -83,21 +70,28 @@ def wc(file, top_rank, user_dic, udic_type, pos=[]):
     except:
         raise
 
+# 単語数カウント
 
-def count_word(word_file, top_rank, user_dic, udic_type, count, put_file, count_file):
+
+def count_word(word_file, top_rank, user_dic,  udic_type):
     try:
-        if put_file:
-            with open(count_file, mode='w', encoding='utf8') as f:
-                words = wc(word_file, top_rank, user_dic, udic_type,
-                           ['名詞', '動詞', '形容詞', '形容動詞', '感動詞'])
-                for k, v in words:
-                    f.write('%s\t%d\n' % (k, v))
-                    if count:
-                        print('%s:%d\n' % (k, v))
-        else:
-            words = wc(word_file, top_rank, user_dic, udic_type,
-                       ['名詞', '動詞', '形容詞', '形容動詞', '感動詞'])
-            for k, v in words:
-                print('%s:%d\n' % (k, v))
+        count_result = wc(word_file, top_rank, user_dic, udic_type,
+                          ['名詞', '動詞', '形容詞', '形容動詞', '感動詞'])
+        return count_result
+    except:
+        raise
+
+# 単語分割
+
+
+def split_text(src, udic_file, stop_words, udic_type):
+    try:
+        a = word_extraction(udic_file, udic_type, stop_words)
+        token_list = []
+        with open(src, encoding='utf8') as f1:
+            for line in f1:
+                tokens = list(a.analyze(line))
+                token_list.append(tokens)
+            return token_list
     except:
         raise
