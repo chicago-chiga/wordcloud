@@ -1,5 +1,6 @@
 import argparse
 import os
+from pathlib import Path
 from re import L
 import sys
 import traceback
@@ -29,6 +30,8 @@ if __name__ == '__main__':
                             help='設定用のyamlファイル名')
         parser.add_argument(
             '-c', '--count', action='store_true', help='文字数カウント結果を表示')
+        parser.add_argument(
+            '-w', '--write', action='store_true', help='文字数カウントファイルを出力')
         args = parser.parse_args()
         setting_yaml = os.path.join(cur_dir, args.yaml)
 
@@ -42,6 +45,7 @@ if __name__ == '__main__':
 
         input_txt = os.path.join(file_dir, settings['input_txt'])
         user_dic = os.path.join(file_dir, settings['user_dic'])
+        udic_type = settings['udic_type']
         output_words_txt = os.path.join(file_dir, settings['output_words'])
         font_path = settings['font_path']
         wordcloud_png = os.path.join(file_dir, settings['wordcloud_png'])
@@ -55,7 +59,8 @@ if __name__ == '__main__':
 
     try:
         # call wordcloud_module
-        mw.split_text(input_txt, output_words_txt, user_dic, stop_words)
+        mw.split_text(input_txt, output_words_txt,
+                      user_dic, stop_words, udic_type)
         mw.put_wordcloud(output_words_txt, wordcloud_png, font_path)
 
         logger.info('===ファイル作成完了===')
@@ -69,9 +74,16 @@ if __name__ == '__main__':
 
     try:
         # 文字カウント（オプション指定ありのとき）
-        if args.count:
+        if args.count or args.write:
             logger.info('===文字数カウント開始===')
-            mw.count_word(output_words_txt, top_rank)
+            if args.write:
+                count_file = os.path.join(file_dir, Path(
+                    settings['wordcloud_png']).stem + '.txt')
+                logger.info('---カウント結果ファイル"' + count_file + '"')
+            else:
+                count_file = None
+            mw.count_word(output_words_txt, top_rank, user_dic, udic_type,
+                          args.count, args.write, count_file)
             logger.info('===文字数カウント終了')
     except Exception:
         t = traceback.format_exc()
