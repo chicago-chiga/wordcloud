@@ -5,10 +5,8 @@ import sys
 import traceback
 from logging import config, getLogger
 from pathlib import Path
-# from re import L
 
 import yaml
-from numpy import argsort
 
 from wordcloud_module import module_wordcloud as mw
 
@@ -84,6 +82,12 @@ if __name__ == '__main__':
             # 単語数カウント
             word_count = mw.count_word(
                 setting.output_words_txt, setting.top_rank, setting.user_dic, setting.udic_type)
+
+            # 標準出力
+            if args.count:
+                for k, v in word_count:
+                    print('%s\t%d' % (k, v))
+
             # ファイル出力
             if args.write:
                 count_file = os.path.join(setting.file_dir, Path(
@@ -94,10 +98,6 @@ if __name__ == '__main__':
                         f3.write('%s\t%d\n' % (k, v))
             else:
                 count_file = None
-            # 標準出力
-            if args.count:
-                for k, v in word_count:
-                    print('%s\t%d' % (k, v))
             logger.info('===単語数カウント終了===')
 
     except FileNotFoundError:
@@ -116,8 +116,8 @@ if __name__ == '__main__':
         # word cloud 作成
         mw.put_wordcloud(setting.output_words_txt,
                          setting.wordcloud_png, setting.font_path)
+        logger.info('---WordCloudファイル' + setting.wordcloud_png + '"')
         logger.info('===ファイル作成完了===')
-        logger.info('---作成ファイル' + setting.wordcloud_png + '"')
     except Exception:
         t = traceback.format_exc()
         logger.error('===WordCloudファイル作成エラー===')
