@@ -9,6 +9,10 @@ input_txt: filmarks_review_starwars_1.txt
 # ユーザ辞書の名前（必須）
 user_dic: udic.csv
 
+# ユーザ辞書のタイプ（ipadic形式かsimpledic形式を選択）
+# udic_type: ipadic
+udic_type: simpledic
+
 # 一時ファイル名（固定でよい）
 output_words: tmp_words.txt
 
