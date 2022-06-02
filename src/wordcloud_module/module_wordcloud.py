@@ -119,5 +119,6 @@ def put_wordcloud(word_file, png_file, font_path):
                                   background_color='white',
                                   width=1024, height=674).generate(text)
             wordcloud.to_file(png_file)
+            return True
     except:
         raise
