@@ -1,5 +1,3 @@
-# from janome.tokenizer import Tokenizer
-# from janome.analyzer import Analyzer
 from janome.tokenfilter import TokenFilter
 
 
