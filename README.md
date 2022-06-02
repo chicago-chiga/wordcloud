@@ -136,3 +136,18 @@ over ver.3.7
     python create_wordcloud.py -h
     ```
 
+## 実行（ブラウザ版）
+
+* Streamlit版を起動
+
+    ```bash
+    # simple running
+    streamlit run st_create_wordcloud.py
+
+    # filter loopback address
+    streamlit run --server.address localhost st_create_wordcloud.py
+    ```
+
+* 表示されたURL（デフォルトは  http://localhost:8501) をブラウザで起動する
+
+* cf [documentation](https://docs.streamlit.io/)

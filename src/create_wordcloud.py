@@ -114,10 +114,11 @@ if __name__ == '__main__':
 
     try:
         # word cloud 作成
-        mw.put_wordcloud(setting.output_words_txt,
-                         setting.wordcloud_png, setting.font_path)
-        logger.info('---WordCloudファイル' + setting.wordcloud_png + '"')
-        logger.info('===ファイル作成完了===')
+        result = mw.put_wordcloud(setting.output_words_txt,
+                                  setting.wordcloud_png, setting.font_path)
+        if result:
+            logger.info('---WordCloudファイル' + setting.wordcloud_png + '"')
+            logger.info('===ファイル作成完了===')
     except Exception:
         t = traceback.format_exc()
         logger.error('===WordCloudファイル作成エラー===')
