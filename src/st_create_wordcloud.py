@@ -106,7 +106,7 @@ def main():
         split_text = mw.split_text(
             tmp_input.name, tmp_user_dic_name, stop_words, udic_type)
 
-        with open(os.path.join(dname.name, 'split_word.txt'), "w") as tmp_split_word:
+        with open(os.path.join(dname.name, 'split_word.txt'), "w",  encoding='utf-8') as tmp_split_word:
             writer = csv.writer(tmp_split_word, delimiter=' ')
             writer.writerows(split_text)
 
