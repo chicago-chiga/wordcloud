@@ -1,5 +1,5 @@
 # WordCloud作成ツール
-Janome(https://mocobeta.github.io/janome/)を使って、単語数カウント・WordCloudをするためのツール
+Janome(https://mocobeta.github.io/janome/) を使って、単語数カウント・WordCloudをするためのツール
 
 ## environment
 
@@ -11,6 +11,7 @@ over ver.3.7
     Janome==0.4.2
     PyYAML==6.0
     wordcloud=1.8.1
+    streamlit==1.9.1
     ```
 
     * pip
