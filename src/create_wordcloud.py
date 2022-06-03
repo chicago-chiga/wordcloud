@@ -59,7 +59,7 @@ if __name__ == '__main__':
         # setting
         setting_yaml = os.path.join(cur_dir, args.yaml)
 
-        with open(setting_yaml, 'r', encoding='utf8') as f:
+        with open(setting_yaml, 'r', encoding='utf8', encoding='utf-8') as f:
             yaml_file = yaml.safe_load(f)
             setting = SettingsClass(yaml_file=yaml_file)
 
