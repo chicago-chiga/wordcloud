@@ -46,6 +46,15 @@ def main():
     # サイドバーエリア
     st.sidebar.markdown('### 各種設定')
 
+    # font_file
+    st.sidebar.markdown('**フォントファイル [必須]**')
+    font_file = st.sidebar.file_uploader(label='TTF形式のみ:')
+
+    if font_file is not None:
+        with open(os.path.join(dname.name, font_file.name), "wb") as tmp_font_file:
+            font_path = Path(tmp_font_file.name)
+            font_path.write_bytes(font_file.getvalue())
+
     # ユーザー辞書
     st.sidebar.markdown('**ユーザー辞書**')
     user_dic = st.sidebar.file_uploader(label='単語登録が必要なときだけ:')
@@ -56,15 +65,6 @@ def main():
         with open(os.path.join(dname.name, user_dic.name), "wb") as tmp_user_dic:
             udic_path = Path(tmp_user_dic.name)
             udic_path.write_bytes(user_dic.getvalue())
-
-    # font_file
-    st.sidebar.markdown('**フォントファイル [必須]**')
-    font_file = st.sidebar.file_uploader(label='TTF形式のみ:')
-
-    if font_file is not None:
-        with open(os.path.join(dname.name, font_file.name), "wb") as tmp_font_file:
-            font_path = Path(tmp_font_file.name)
-            font_path.write_bytes(font_file.getvalue())
 
     # udic_type
     st.sidebar.markdown('**辞書タイプ**')

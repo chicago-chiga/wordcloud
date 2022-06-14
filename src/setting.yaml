@@ -1,10 +1,11 @@
 # define folder and file
 
-# 入出力ファイルの置き場所（指定しない場合は現在のフォルダ）
-file_dir: ./file_dir
+# 入出力ファイルの置き場所 1ファイルモードの場合は必須
+#（指定しない場合は現在のフォルダ）
+file_dir: /c/wordcloud/file_dir
 
 # 分析対象の入力ファイル（必須）
-input_txt: filmarks_review_starwars_1.txt
+input_txt: sample.txt
 
 # ユーザ辞書の名前（必須）
 user_dic: udic.csv
@@ -17,15 +18,24 @@ udic_type: simpledic
 output_words: tmp_words.txt
 
 # 出力するwordcloudファイルのフォントファイルのパス（TTFファイル）
-font_path: ./font/YuGothB003.ttf
+font_path: /c/wordcloud/font/YuGothB003.ttf
 
 # 出力するwordcloud画像ファイル名（必須）
-wordcloud_png: wc_starwars.png
+wordcloud_png: wc_sample.png
+
+# バッチ用(指定しない場合はfile_dir)
+# 分析対象の入力ファイル（バッチ用）
+input_dir: /c/wordcloud/in_batch_dir
+# 分析対象の出力ファイル（バッチ用）
+output_dir: /c/wordcloud/out_batch_dir
 
 # 除外する単語があれば指定する
 stop_words:
   - "ほしい"
   - "欲しい"
-
+  - "する"
+  - "れる"
+  - "いる"
+  - "-"
 # 文字数カウントオプションで上位何番目まで表示するか
 top_rank: 40

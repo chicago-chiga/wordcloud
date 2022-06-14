@@ -2,3 +2,6 @@ font
 file_dir
 __pycache__
 __init__
+error.log
+in_batch_dir
+out_batch_dir
