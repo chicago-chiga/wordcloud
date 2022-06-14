@@ -36,8 +36,9 @@ over ver.3.7
 |  |--(ユーザー辞書)
 |
 |--src
-|  |--bw_create_wordcloud.py   # ブラウザ版 main
+|  |--st_create_wordcloud.py   # ブラウザ版 main
 |  |--create_wordcloud.py      # バッチ版 main
+|  |--create_wordcloud_all.py  # バッチ版(一括実行用) main
 |  |--logconf.yaml             # ログ設定 バッチ用
 |  |--setting.yaml             # 入出力ファイル、辞書などの設定 
 |  |--wordcloud_module
@@ -77,6 +78,12 @@ over ver.3.7
     # 出力するwordcloud画像ファイル名（必須：拡張子はpng）
     wordcloud_png: wc_review.png
 
+    # バッチ用(指定しない場合はfile_dir)
+    # 分析対象の入力ファイル（バッチ用）
+    input_dir: /c/wordcloud/in_batch_dir
+    # 分析対象の出力ファイル（バッチ用）
+    output_dir: /c/wordcloud/out_batch_dir
+
     # 除外する単語があれば指定する
     stop_words:
     - "ほしい"
@@ -113,6 +120,8 @@ over ver.3.7
     * ユーザ辞書についてはjanome HPの「ユーザー定義辞書を使う」を参照（https://mocobeta.github.io/janome/#id8)
 
 ## 実行（バッチ版）
+1ファイルを指定して分析する場合は、`create_wordloud.py` を実行
+対象ディレクトリを指定して複数ファイルをまとめて分析する場合は、`create_wordloud_all.py` を実行する
 
 * srcフォルダで実行
 
@@ -132,6 +141,9 @@ over ver.3.7
 
     # 単語数をコンソールにもファイルにも出力する場合は、両方のオプションを指定する
     python create_wordcloud.py -c -w
+
+    # ディレクトリにある複数ファイルをすべて分析する場合(単語数のカウントも実施)
+    python create_wordcloud_all.py -c -w
 
     # help
     python create_wordcloud.py -h

@@ -9,26 +9,7 @@ from pathlib import Path
 import yaml
 
 from wordcloud_module import module_wordcloud as mw
-
-
-class SettingsClass:
-    def __init__(self, yaml_file):
-
-        if yaml_file['file_dir'] == None:
-            self.file_dir = os.path.dirname(os.path.abspath(__file__))
-        else:
-            self.file_dir = yaml_file['file_dir']
-
-        self.input_txt = os.path.join(self.file_dir, yaml_file['input_txt'])
-        self.user_dic = os.path.join(self.file_dir, yaml_file['user_dic'])
-        self.udic_type = yaml_file['udic_type']
-        self.output_words_txt = os.path.join(
-            self.file_dir, yaml_file['output_words'])
-        self.font_path = yaml_file['font_path']
-        self.wordcloud_png = os.path.join(
-            self.file_dir, yaml_file['wordcloud_png'])
-        self.stop_words = yaml_file['stop_words']
-        self.top_rank = yaml_file['top_rank']
+from wordcloud_module import yaml_settings
 
 
 def set_args():
@@ -43,7 +24,7 @@ def set_args():
     return args
 
 
-if __name__ == '__main__':
+def main():
     try:
         cur_dir = os.path.dirname(os.path.abspath(__file__))
         # log
@@ -59,9 +40,9 @@ if __name__ == '__main__':
         # setting
         setting_yaml = os.path.join(cur_dir, args.yaml)
 
-        with open(setting_yaml, 'r', encoding='utf8', encoding='utf-8') as f:
+        with open(setting_yaml, 'r', encoding='utf8') as f:
             yaml_file = yaml.safe_load(f)
-            setting = SettingsClass(yaml_file=yaml_file)
+            setting = yaml_settings.Settings_Single(yaml_file)
 
     except Exception:
         t = traceback.format_exc()
@@ -92,7 +73,7 @@ if __name__ == '__main__':
             if args.write:
                 count_file = os.path.join(setting.file_dir, Path(
                     setting.wordcloud_png).stem + '.txt')
-                logger.info('---カウント結果ファイル"' + count_file + '"')
+                logger.info(f"---カウント結果ファイル: {count_file} ")
                 with open(count_file, mode='w', encoding='utf8') as f3:
                     for k, v in word_count:
                         f3.write('%s\t%d\n' % (k, v))
@@ -124,3 +105,8 @@ if __name__ == '__main__':
         logger.error('===WordCloudファイル作成エラー===')
         logger.error(t)
         sys.exit(1)
+
+
+# 1ファイルのみの場合
+if __name__ == '__main__':
+    main()
