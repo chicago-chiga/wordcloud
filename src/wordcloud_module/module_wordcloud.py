@@ -9,7 +9,7 @@ from wordcloud import WordCloud
 from wordcloud_module.stopword_filter import StopWordFilter
 
 
-class MyTokenezer:
+class MyTokenizer:
 
     def __init__(self):
         pass
@@ -64,13 +64,13 @@ class MyAnalyzer:
 def split_text(src, user_dic, stop_words, udic_type):
     try:
         char_filters = [RegexReplaceCharFilter('《．＊？》', '')]
-        tokenizer = MyTokenezer().set_tokenizer(user_dic, udic_type=udic_type)
+        tokenizer = MyTokenizer().set_tokenizer(user_dic, udic_type=udic_type)
         token_filters = MyTokenFilter().set_token_filter4split(stop_words)
 
         a = MyAnalyzer().set_analyzer4split(char_filters, tokenizer, token_filters)
 
         token_list = []
-        with open(src, encoding='utf8') as f1:
+        with open(src, 'r', encoding='utf8') as f1:
             for line in f1:
                 tokens = list(a.analyze(line))
                 token_list.append(tokens)
@@ -83,7 +83,7 @@ def split_text(src, user_dic, stop_words, udic_type):
 
 def count_word(word_file, top_rank, user_dic,  udic_type):
     try:
-        tokenizer = MyTokenezer().set_tokenizer(user_dic, udic_type=udic_type)
+        tokenizer = MyTokenizer().set_tokenizer(user_dic, udic_type=udic_type)
         with open(word_file, 'r', encoding='utf8') as f:
             token_filters = MyTokenFilter().set_token_filter4count()
 
