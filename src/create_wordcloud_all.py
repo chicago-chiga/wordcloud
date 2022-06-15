@@ -26,7 +26,7 @@ def set_args():
 
 
 def get_input_files(input_dir):
-    input_files = input_dir.iterdir()
+    input_files = input_dir.glob('*.txt')
     return input_files
 
 
