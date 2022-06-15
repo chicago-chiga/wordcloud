@@ -61,6 +61,8 @@ def main():
         input_files = get_input_files(input_dir)
         # ファイル数分の繰り返し
         for input_txt in input_files:
+            if os.path.basename(input_txt) == os.path.basename(setting.output_words_txt):
+                continue
 
             logger.info(f"---対象ファイル: {os.path.basename(input_txt)}")
             # 単語分割
