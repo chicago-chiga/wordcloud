@@ -13,7 +13,7 @@ from wordcloud_module import module_wordcloud as mw
 
 @st.cache(suppress_st_warning=True)
 def create_temp_dir():
-    dname = tempfile.TemporaryDirectory()
+    dname = tempfile.TemporaryDirectory(prefix='stlit')
     return dname
 
 
